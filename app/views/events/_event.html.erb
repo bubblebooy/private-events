@@ -1,0 +1,27 @@
+<li class="event">
+  <div class="title-block">
+
+
+    <h3> <%= event.title.nil? ? "Event" : event.title %></h3>
+
+      <h4> <%= event.date.year == Date.current.year ? event.date.to_formatted_s(:short) : event.date.to_formatted_s(:long) %></h4>
+
+    <% unless event.start_time.nil? %>
+      <h5> <%= event.start_time.to_s(:time) %> - <%= event.end_time.to_s(:time) %></h5>
+    <% end %>
+
+    <% if current_user == event.creator %>
+    <%= link_to 'Edit', edit_event_path(event) %> |
+    <%= link_to 'Delete', event, method: :delete, data: { confirm: 'Are you sure?' } %></td> |
+    <% end %>
+    <% if event.attendees.find_by(id: current_user) %>
+      <%= link_to 'Leave', leave_event_path(event), method: :delete %>
+      <% elsif !current_user.nil?%>
+        <%= link_to 'Join', join_event_path(event) %>
+    <% end %>
+  </div>
+  <p> <%= event.description %></p>
+</li>
+
+
+<!-- .to_formatted_s(:short) -->

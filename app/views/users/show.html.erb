@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Username:</strong>
+  <%= @user.username %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
+
+<h2> Upcoming Events </h2>
+
+<ul class="events">
+  <%= render @events.upcoming %>
+</ul>
+
+<h2> Past Events </h2>
+
+<ul class="events">
+  <%= render @events.past %>
+</ul>
